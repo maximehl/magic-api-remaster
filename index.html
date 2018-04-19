@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="magic-api.js"></script>
+    <link rel="stylesheet" type="text/css" href="magic-api.css">
+</head>
+<body>
+<div class="noPadding">
+    <h1>Magic: The Gathering Card Search</h1>
+    <div id="searchSettings" class="bigContainer">
+        <h3>Search Settings</h3>
+        <div id="searchTerms"></div>
+        <button onclick="clearSearch()">Refresh Search Settings</button>
+        <br>
+        <datalist id="suggestions"></datalist>
+        Card name:
+        <select id="data1or" class="andOrSelect" title="Select AND, OR, or NOT">
+            <option value="or+">OR</option>
+            <option value="">AND</option>
+            <option value="-">NOT</option>
+        </select>
+        <input id="data1" type="text" list="suggestions" oninput="generateSuggestions(3)"
+                         onfocus="generateSuggestions(3)" data-num-options="many"
+                         title="Optional: enter text to appear in the card name(s). If multiple terms, separate them with commas."
+                         >
+        Card type:
+        <select id="data3or" class="andOrSelect" title="Select AND, OR, or NOT">
+            <option value="or+">OR</option>
+            <option value="">AND</option>
+            <option value="-">NOT</option>
+        </select>
+        <input id="data3" type="text" onchange="checkCreature()"
+                         title="Optional: enter card type(s). If multiple terms, separate them with commas."
+                         onfocus="generateSuggestions(0)" list="suggestions" data-num-options="many"><br>
+        Card subtype:
+        <select id="data4or" class="andOrSelect" title="Select AND, OR, or NOT">
+            <option value="or+">OR</option>
+            <option value="">AND</option>
+            <option value="-">NOT</option>
+        </select>
+        <input id="data4" type="text"
+                            title="Optional: enter card subtype(s). If multiple terms, separate them with commas."
+                            onfocus="generateSuggestions(1)" list="suggestions" data-num-options="many">
+        Card supertype:
+        <select id="data5or" class="andOrSelect" title="Select AND, OR, or NOT">
+            <option value="or+">OR</option>
+            <option value="">AND</option>
+            <option value="-">NOT</option>
+        </select>
+        <input id="data5" type="text"
+                              title="Optional: enter card supertype(s). If multiple terms, separate them with commas."
+                              onfocus="generateSuggestions(2)" list="suggestions" data-num-options="many"><br>
+        <div id="creatureOptions">
+            Creature power:
+            <select id="data8or" class="andOrSelect" title="Select AND or OR">
+                <option value="">AND</option>
+                <option value="or+">OR</option>
+            </select>
+            <select id="data80" title="Select Power, Toughness, or Sum of power and toughness">
+                <option value="pow">Power</option>
+                <option value="tou">Toughness</option>
+                <option value="powtou">Sum</option>
+            </select>
+            <select id="data81" title="Select >, <, =, >=, <=, !=">
+                <option value=">">></option>
+                <option value="<"><</option>
+                <option value="=">=</option>
+                <option value=">=">>=</option>
+                <option value="<="><=</option>
+                <option value="!=">!=</option>
+            </select>
+            <input type="number" id="data82" title="Enter a number.">
+        </div>
+        Card text:
+        <select id="data6or" class="andOrSelect" title="Select AND or NOT">
+            <option value="">AND</option>
+            <option value="-">NOT</option>
+        </select>
+        <input id="data6" type="text"
+                         title="Optional: enter text to appear in rules. If multiple terms, separate them with commas."
+                         onfocus="generateSuggestions(4)" list="suggestions" data-num-options="many">
+        Card Converted Mana Cost:
+        <select id="data7or" class="andOrSelect" title="Select AND or OR">
+            <option value="or+">OR</option>
+            <option value="">AND</option>
+        </select>
+        <input id="data7" type="number" title="Optional: enter converted mana cost.">
+        Play format:
+        <select id="data12" title="Optional: select the play format for the cards." data-num-options="1">
+            <option value=""></option>
+            <option value="standard">Standard</option>
+            <option value="modern">Modern</option>
+            <option value="legacy">Legacy</option>
+            <option value="vintage">Vintage</option>
+            <option value="commander">Commander</option>
+        </select>
+        <br>
+        <div id="data2" class="collapsible menu canClick notShown" data-num-options="5">
+            <p><b>Color</b></p>
+            <br>
+            <input id="data20" value="white" title="white" type="checkbox">White
+            <input id="data21" value="blue" title="blue" type="checkbox">Blue
+            <input id="data22" value="black" title="black" type="checkbox">Black
+            <input id="data23" value="red" title="red" type="checkbox">Red
+            <input id="data24" value="green" title="green" type="checkbox">Green
+        </div>
+        <div id="data10" class="collapsible menu canClick notShown" data-num-options="4">
+            <p><b>Rarity</b></p>
+            <br>
+            <input id="data60" value="common" title="common" type="checkbox">Common
+            <input id="data61" value="uncommon" title="uncommon" type="checkbox">Uncommon
+            <input id="data62" value="rare" title="rare" type="checkbox">Rare
+            <input id="data63" value="mythic" title="mythic" type="checkbox">Mythic Rare
+        </div>
+        <br>
+        <div id="data11" class="collapsible menu canClick notShown" data-num-options="sets">
+            <p><b>Set</b></p>
+            <br>
+            <div id="blocksContainer"></div>
+        </div>
+
+        <br>
+        Sort Order:
+        <select id="data0" title="selectSortOrder">
+            <option value=""></option>
+        </select>
+        <br>
+        <button onclick="searchButtonClicked()">Search</button>
+    </div>
+
+    <div id="searchResults" class="collapsible menu bigMenu canClick bigContainer">
+        <h3>Cards</h3>
+        <div id="navBar">
+            <br>
+            <!--<div id="firstPage" class="pageButton canClick" onclick="changePage(0)">First Page</div>-->
+            <button id="prevPage" class="pageButton canClick" onclick="changePage('--')">Previous Page</button>
+            <div class="centerMe">Page number <span id="currentPageNumber">1</span></div><!-- of <span></span>-->
+            <button id="nextPage" class="pageButton canClick" onclick="changePage('++')">Next<br>Page</button>
+            <!--<div id="goToPage" class="pageButton canClick"
+                     onclick="changePage($('#pageWanted').val()); $('#pageWanted').val(0);">Go to Page:</div>
+                <input id="pageWanted" class="floatRight" type="number"
+                       title="Enter the page of results that you'd like to see.">-->
+        </div>
+
+        <div id="resultsContainerCards" class="noPadding"><br>No results yet!</div>
+
+    </div>
+    <!--<div class="collapsible menu bigMenu canClick bigContainer">
+        <h3>My Decks</h3>
+        <br>
+        Page number <span>1</span> of <span></span>
+        <div id="resultsContainerDecks"></div>
+    </div>-->
+</div>
+</body>
+</html>

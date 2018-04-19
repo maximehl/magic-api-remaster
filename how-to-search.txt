@@ -1,0 +1,63 @@
+search term objects have data for search term type number
+and data for search term itself
+
+"https://api.scryfall.com/cards/search?"
+
+data0 "order="
+
+"&q="
+
+//data1 name
+(just insert the name term after the q=, in quotes"
+
+//data2 color
+//(have selecter for AND, OR, and NOT, and "exclude other colors")
+AND: "+c:"
+OR: "+(c:___+or+c:___)"
+NOT: "-c:"
+
+//data3 type
+AND: "+t:"
+OR: "+or+t:"
+NOT: "-t:"
+
+//data4 subtype
+AND: "+t:"
+OR: "+or+t:"
+NOT: "-t:"
+
+//data5 supertype
+AND: "+t:"
+OR: "+or+t:"
+NOT: "-t:"
+
+//data6 rules text
+AND: " +o:'____' "
+NOT: " -o:'____' "
+
+//data7 converted mana cost
+//select for >, <, =, >=, <=, !=
+AND: "+cmc"
+OR: "+or+cmc"
+
+//data8 power toughness creatures only
+//selecter for power (pow), toughness (tou), power+toughness (powtou)
+//selecter for >, <, =, >=, <=, !=
+Special conditions?
+pow>tou for >, <, =, >=, <=, !=
+
+//data9 specific card layout
++(is: _____ )
+OR: "+or+is:"
+
+//data10 rarity
++(r: ______ )
+OR: "+or+r:"
+
+//data11 set codes
++(e: _____ )
+OR: "+or+e:"
+
+//data12 format legality
++(f: _______ )
+OR: "+or+f:"

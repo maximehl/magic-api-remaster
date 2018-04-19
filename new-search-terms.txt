@@ -1,0 +1,31 @@
+new order of searchTerms
+https://api.scryfall.com/cards/search?
+
+order (name, set, released, rarity, color, usd, cmc, power, toughness)
+order direc (auto, asc, desc) [sort descending? checkbox]
+
+color (c: [AND w, u, r, b, g, c, m]; -c: [NOT w, u, r, b, g, c, m]; ">" has these colors AND more colors; ">=" has these colors and maybe more; "<" has any one of these colors; "<=" has any of these colors or both)
+
+t: (type, subtype, or supertype)
+-t: (NOT type)
+
+o: (rules text; can be single words or " ")
+
+m: (mana cost WUBRG {W/R} {R/P})
+cmc >, <, =, >=, <=, !=
+
+pow
+tou >, <, =, >=, <=, !=
+
+is: (cards: split, flip, transform, meld, leveler (levels up) use +or+)
+
+r: (rarity: common, uncommon, rare, mythic use +or+)
+
+e: (set three letter code use +or+)
+
+f: (format: standard, modern, legacy, vintage, commander, brawl, future, pauper, frontier, penny, 1v1, duel; use +or+)
+
+
+https://scryfall.com/search?q=t:land+(a:titus+or+a:bradley)
+
+393821

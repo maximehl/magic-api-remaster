@@ -1,0 +1,171 @@
+body{
+    font-family: Helvetica, sans-serif;
+}
+
+div{
+    text-align: center;
+    margin:auto;
+    border-radius: 10px;
+    padding:10px;
+}
+
+.collapsible{
+    overflow: hidden;
+    /*background-color: gray;
+     height:1.25em;*/
+    display: inline-block;
+    transition:0.5s;
+}
+
+.bigMenu{
+    width:90%;
+}
+
+.menu{
+    /*width:200px;*/
+    background-color: gray;
+}
+
+.noPadding, p{
+    margin: 0;
+    padding: 0;
+}
+
+#blocksMenu, #data5{
+    max-width:800px;
+}
+
+.block{
+    display: inline-block;
+    border-radius: 5px;
+    margin:5px;
+    width:162px;
+    transition:0.5s;
+    background-color: lightgrey;
+}
+.set{
+    transition:0.5s;
+    margin:5px;
+    border: 1px solid black;
+    background-color: lightgrey;
+}
+.set:hover{
+    background-color: #9d9d9d;
+}
+/*.block:hover{
+ background-color: #9d9d9d;
+}*/
+
+.iconImage{
+    width:2.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.canClick{
+    cursor: pointer;
+}
+
+.set.selected{
+    background-color: #6776a2;
+}
+.block.selected{
+    background-color: #93a2d8;
+}
+
+input[type=checkbox]{
+    margin:0 5px 0 15px;
+    outline: 0;
+}
+input[type=text]{
+    margin:4px 20px 4px 5px;
+    background-color: #eeeeee;
+    outline: 0;
+}
+select{
+    margin:4px 20px 4px 3px;
+    background-color: #eeeeee;
+    outline: 0;
+    font-size: smaller;
+}
+
+.bigContainer{
+    background-color: lightgrey;
+    border-radius: 20px;
+    border:1px solid black;
+    margin:10px auto;
+}
+
+h3{
+    margin: 10px auto;
+}
+
+.pageButton{
+    /*display: inline-block;
+     background-color: cadetblue;*/
+    border-radius: 10px;
+    width: 80px;
+    font-size: small;
+    padding: 5px;
+}
+
+#navBar{
+    margin: 0 10px;
+    padding: 0;
+    display: none;
+}
+#prevPage{
+    /*display: inline-block;*/
+    float: left;
+}
+#nextPage{
+    float: right;
+    /*display: inline-block;*/
+}
+.centerMe{
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.card{
+    display: inline-block;
+    padding: 5px;
+    background-color: white;
+    border-radius: 12px;
+    margin: 10px;
+}
+
+.cardImage{
+    width: 100%;
+}
+
+.cardImage:hover{
+    /*width: 100%;*/
+    cursor: default;
+}
+
+button{
+    font-size: medium;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    padding: 5px;
+    border:2px solid #c0c0c0;
+    outline:none;
+    margin: 5px auto;
+}
+button:hover{
+    background-color: #dbdbdb;
+    border-color: #adadad;
+}
+button:active{
+    background-color: #c0c0c0;
+    border-color: #929292;
+}
+
+#creatureOptions{
+    display: none;
+}
+
+.andOrSelect{
+    margin:0;
+}
